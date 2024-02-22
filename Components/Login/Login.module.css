@@ -1,0 +1,208 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,600;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital@0;1&display=swap');
+
+.container {
+    display: flex;
+}
+
+.leftContainer {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #17A2B8;
+    width: 60vw;
+    height: 100vh;
+}
+
+.back {
+    width: 14rem;
+    height: 14rem;
+    position: absolute;
+    top: 40%;
+    left: 50.5%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    background-color: #317F8B;
+    border: 1px solid black ;
+    border-radius: 50%;
+}
+
+.image {
+    position: absolute;
+    top:42%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    width: 23rem;
+    height:23rem;
+    z-index: 1;
+}
+
+.leftsideText {
+    font-family: "Open Sans", sans-serif;
+    font-size: 33px;
+    color: white;
+    margin-top: 15rem;
+    padding: 0%;
+}
+
+.leftsideText2 {
+    font-family: "Open Sans", sans-serif;
+    color: white;
+    font-size: 19px;
+    margin: 0%;
+    padding: 0%;
+}
+
+.rightContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1; /* Add this property */
+}
+
+#login {
+    margin-top: 23vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "OpenSans";
+    font-size: 1.8rem;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center; 
+    color: #343434;
+
+}
+
+.form {
+    margin-top: 5%;
+    border-radius: 11px;
+    max-width: 22rem; /* Added max-width to limit the form width */
+    width: 100%; /* Ensure the form takes full width */
+    box-sizing: border-box; /* Include padding and border in the width calculation */
+}
+
+.name,
+.email,
+.password,
+.confirmPassword {
+    margin: 3%;
+    padding: 5%;
+    border: solid 1px #d0d0d0;
+    border-radius: 11px;
+    width: 100%; /* Ensure the input fields take full width */
+    box-sizing: border-box; /* Include padding and border in the width calculation */
+    text-indent: 20px;
+    align-self: stretch;
+   
+   
+    
+}
+input::placeholder {
+    font-family: "Open Sans";
+    font-size: 15.3px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #828282;
+    text-indent: 30px;
+}
+
+.button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1vw;
+    padding: 5%;
+    border: solid 1px #d0d0d0;
+    border-radius: 11px;
+    width: 100%; /* Ensure the input fields take full width */
+    box-sizing: border-box; /* Include padding and border in the width calculation */
+    border-radius: 55px;
+    background-color: #17a2b8;
+    color: aliceblue;
+}
+.loginbutton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1vw;
+    padding: 3%;
+    border: solid 1px #d0d0d0;
+    border-radius: 11px;
+    width: 100%; /* Ensure the input fields take full width */
+    box-sizing: border-box; /* Include padding and border in the width calculation */
+    border-radius: 55px;
+    flex-grow: 0;
+    font-family: OpenSans;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #17a2b8;
+    background-color: aliceblue;
+}
+.existaccount{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 15%;
+    flex-grow: 0;
+    font-family: OpenSans;
+    font-size: 17px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #828282;
+  }
+
+input.name{
+    background-image: url('../../src/assets/Icons/Profile.png'); /* all icons in a single file */
+    background-repeat: no-repeat;
+    background-position:10px ; /* position of the right icon */
+    background-size: 1.7em;
+}
+input.email{
+    background-image: url('../../src/assets/Icons/icon.png'); /* all icons in a single file */
+    background-repeat: no-repeat;
+    background-position:10px ; /* position of the right icon */
+    background-size: 1.7em;
+}
+input.password,.confirmPassword{
+    background-image: url('../../src/assets/Icons/lock.png'); /* all icons in a single file */
+    background-repeat: no-repeat;
+    background-position:10px ; /* position of the right icon */
+    background-size: 1.7em;
+}
+.inputContainer {
+    position: relative;
+  }
+  
+  .inputIcon {
+    position: absolute;
+    top: 50%;
+    right: 1px; /* Adjust the right spacing as needed */
+    transform: translateY(-50%);
+    cursor: pointer;
+    width:1.7vw;
+    
+
+  }
+  .error{
+
+    color:red
+  }
