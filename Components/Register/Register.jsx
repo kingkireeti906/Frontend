@@ -64,13 +64,12 @@ function Register() {
     }
     const response = await registeruser({...data})
    
-    console.log(response.data.token)
-if(response){
-  localStorage.setItem('token', response.data.token);
-
-  localStorage.setItem('username', response.data.name);
-  
-}
+    console.log(response)
+    if (response && response.success) {
+      localStorage.setItem('token', response.token);
+      localStorage.setItem('username', response.name);
+      navigate('/');
+  }
   }
 const navigatefunction=()=>{
   navigate('/login')

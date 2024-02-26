@@ -1,0 +1,114 @@
+#sectionname {
+    width: 10vw;
+    margin-top: 5%;
+    margin-left: 10%;
+    font-family: OpenSans;
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #000;
+    
+}
+
+.formcontainer {
+    margin-top: 2.5%;
+    border-radius: 11px;
+    width: 100%; /* Ensure the form takes full width */
+    box-sizing: border-box; /* Include padding and border in the width calculation */
+
+}
+
+.name,
+.Oldpassword,
+.Newpassword{
+    margin: 6%;
+    padding: 6%;
+    border: solid 1px #d0d0d0;
+    border-radius: 11px;
+    width: 100%; /* Ensure the input fields take full width */
+    box-sizing: border-box; /* Include padding and border in the width calculation */
+    text-indent: 30px;
+    align-self: stretch;
+   
+   
+    
+}
+input::placeholder {
+    font-family: "Open Sans";
+    font-size: 15.3px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #828282;
+    text-indent: 2.5rem;
+}
+input.name{
+    background-image: url('../../src/assets/Icons/Profile.png'); /* all icons in a single file */
+    background-repeat: no-repeat;
+    background-position:10px ; /* position of the right icon */
+    background-size: 1.7em;
+}
+input.Oldpassword,.Newpassword{
+    background-image: url('../../src/assets/Icons/lock.png'); /* all icons in a single file */
+    background-repeat: no-repeat;
+    background-position:10px ; /* position of the right icon */
+    background-size: 1.7em;
+}
+.inputContainer {
+    position: relative;
+   width:18vw;
+    
+  
+
+  }
+  
+  .eyeIcon {
+    position: absolute  ;
+    top: 50%;
+    right: 0%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 1.4vw;
+    
+
+  }
+  .updatebutton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1%;
+    margin-left: 1.5%;
+    padding: 1.2%;
+    border: solid 1px #d0d0d0;
+    border-radius: 11px;
+    width: 20%;
+    height:3% ; /* Adjust the height as needed */
+    box-sizing: content-box; /* Use 'content-box' to exclude padding and border from width and height calculations */
+    flex-grow: 0;
+    font-family: normal;
+    font-size: 14px;
+    text-align: center;
+    color: white;
+    background-color: #17a2b8;
+    border-radius: 3.2rem;
+}
+.error{
+    color: red;
+    font-family: normal;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+   margin-left: 2%;
+
+
+}

@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+/* .maincontainer{
+    height: 100vh;
+
+} */
+
+
+body {
+   margin: 0;
+   padding: 0;
+   overflow-y: hidden; 
+}
+.container {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+
+}
+
+.leftContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20vw;
+    max-height: 100vh; 
+    box-sizing: border-box;
+    border: 1.5px solid #edf5fe; 
+}
+
+
+.promanage,
+.board,
+.analytics,
+.settings,
+.logout {
+    display: flex;
+    align-items: center;
+    width: 20vw;
+    margin: 0%;
+    padding: 0%;
+    margin-top: 0.5rem;
+}
+
+
+
+.promanage_text,
+.board_text,
+.analytics_text,
+.settings_text,
+.logout_text {
+    margin-left: 0.6rem;
+    align-self: flex-start;
+    flex-grow: 0;
+    font-family: "Poppins", sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #707070;
+}
+
+.logout_text {
+    color: #cf3636
+}
+
+.promanage_text {
+    font-family: "Poppins", sans-serif;
+    font-size: 1.25rem;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: black
+}
+
+.promanageIcon,
+.board_icon,
+.analyticsIcon,
+.settingsIcon,
+.logoutIcon {
+    width: 1.8rem;
+    height: 1.8rem;
+    padding-left: 3rem;
+}
+
+.logout {
+    margin-top: auto;
+    padding-bottom: 3rem;
+}
+
+.selected {
+    background-color: rgba(67, 145, 237, 0.1);
+}
+
+.selectedText {
+    color: black;
+}
+
+.rightContainer {
+    flex-grow: 1;
+   overflow: hidden;
+}
+

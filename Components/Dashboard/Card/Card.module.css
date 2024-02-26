@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+ 
+.card {
+    width: 100%;
+    height: auto;
+    background-color: #fff;
+    border-radius: 1.3rem;
+    border: 1px solid #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom:1rem;
+}
+ 
+.cardHeader {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+    padding-left: 1rem;
+}
+ 
+.color {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+}
+ 
+.priority {
+    font-family: "Poppins", sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #707070;
+}
+ 
+.dots{
+    width:2rem;
+    height:2rem;
+    margin-left: auto;
+    margin-right:1rem;
+}
+ 
+.title{
+    font-family: "Poppins", sans-serif;
+    font-size: 1.5rem;
+    margin-left: 1rem;
+    width: fit-content;
+    max-width: 100%;
+    white-space: normal;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+ 
+ 
+.checklist{
+    display: flex;
+    flex-direction: column;
+    margin: 0%;
+    padding: 0%;
+}
+ 
+.checklistTitle{
+    font-family: "Poppins", sans-serif;
+    font-size: 1rem;
+}
+ 
+.checklistItems{
+    display: flex;
+    align-content:space-evenly;
+    flex-direction: column;
+}
+ 
+ 
+.inputfieldsBox {
+    display: flex;
+    align-items: center;
+    border: 0.1rem solid #e2e2e2;
+    border-radius: 0.5rem;
+    margin:0.5rem;
+    padding: 0.5rem; 
+}
+ 
+ 
+ 
+.input {
+    border: none;
+    outline: none;
+    &:focus {
+        outline: none;
+    }
+    flex-grow: 1;
+}
+ 
+.checkBox {
+    transform: scale(1)
+}
+ 
+.arrow{
+    display: flex;
+    width:90%;
+    margin-left:1rem;
+    justify-content: space-between;
+    align-items: center;
+}
+ 
+.down{
+    width:1.5rem;
+    height:1.5rem;
+    /* background-color: #707070; */
+}
+ 
+.arrow div{
+    width:1.5rem;
+    height: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eeecec;
+    border-radius:0.4rem
+}
+ 
+ 
+.cardFooter {
+    display: flex;
+    margin-bottom:1rem;
+}
+ 
+.sectionButtons{
+    display: flex;
+    margin-left: auto;
+}
+ 
+.dueDate, .backlog, .inProgress, .done{
+  margin:0.3rem;  
+  gap: 0.5rem;
+  border: solid #eeecec;
+  border-radius: 0.5rem;
+  background-color: #eeecec;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.6rem;
+  font-weight: 500;
+  text-align: left;
+}
+ 
+.dueDate{
+    margin-left:1rem;
+   font-size: 0.5rem;
+}
+ 
+ 
+.dueDateRed {
+    background-color: #cf3636;
+    color:#fff;
+    border:#cf3636;
+}
+ 
+/* Card.module.css */
+ 
+.highPriorityColor {
+    background-color: #ff2473;
+    border: 1px solid #ff2473;
+}
+ 
+.moderatePriorityColor {
+    background-color: #18b0ff;
+    border: 1px solid #18b0ff;
+}
+ 
+.lowPriorityColor {
+    background-color: #63c05b;
+    border: 1px solid #63c05b;
+}
+ 
+ 
+/* Add any other styles you need */

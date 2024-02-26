@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
+
+.calendar{
+    display: flex;
+    flex-direction: column;
+    background-color: none;
+}
+
+.buttons{
+    display: flex;
+    justify-content: space-between;
+}
+
+.clear, .save{
+    border:none;
+    background-color: none;
+    color:rgb(38, 93, 214);
+    font-family: "Inter", sans-serif;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+/* MyCalendar.module.css */
+
+.custom {
+    width: 100%; /* Set the desired width */
+    height: 100%; /* Set the desired height */
+    border: none; /* Remove border */
+}
+
+/* Adjust other styles as needed */
+
+/* MyCalendar.module.css */
+
+.calendar {
+    width: 300px; /* Set the desired width */
+    height: 300px; /* Set the desired height */
+    border: none; /* Remove border */
+}
+
+/* Adjust other styles as needed */

@@ -30,41 +30,44 @@ function Login() {
   const handlechange = (e) => {
     setData({ ...data, [e.target.name]:e.target.value });
   };
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     // Validate each field
     const newErrors = {};
     let hasErrors = false;
-  
-  
-    if (!data.email) {
-      newErrors.email = "Email is required";
-      hasErrors = true;
-    }
-  
-    if (!data.password) {
-      newErrors.password = "Password is required";
-      hasErrors = true;
-    }
-  
-  
-    if (hasErrors) {
-      setErrors(newErrors);
-      return;
-    }
-    const response = await loginuser({...data})
 
- 
-    console.log(response)
-    if(response){
-        localStorage.setItem('token', response.data.token);
-      
-        localStorage.setItem('username', response.data.name);
-        
-      }
-      
-  }
+    if (!data.email) {
+        newErrors.email = "Email is required";
+        hasErrors = true;
+    }
+
+    if (!data.password) {
+        newErrors.password = "Password is required";
+        hasErrors = true;
+    }
+
+    if (hasErrors) {
+        setErrors(newErrors);
+        return;
+    }
+
+    try {
+        const response = await loginuser({ ...data });
+        console.log("Login API response:", response);
+
+        if (response && response.success) {
+            localStorage.setItem('token', response.token);
+            localStorage.setItem('username', response.name);
+            navigate('/');
+        } else {
+            // Handle unsuccessful login (optional)
+            console.log("Login unsuccessful:", response ? response.errorMessage : "Response is undefined");
+        }
+    } catch (error) {
+        console.error("Error in login API:", error);
+    }
+};
 const naviagtefunction =()=>{
   navigate('/register')
 }
