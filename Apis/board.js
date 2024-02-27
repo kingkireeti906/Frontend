@@ -16,10 +16,10 @@ export const getAnalytics = async () => {
         throw new Error("Failed to fetch analytics data"); // You can customize the error message
     }
 };
-export const create = async ({title,priority,checklist,dueDate}) => {
+export const create = async ({title,priority,checklist,dueDate,vp}) => {
     try {
         const reqUrl = `${backendUrl}/api/v1/board/create`;
-        const reqpayload={title,priority,checklist,dueDate}
+        const reqpayload={title,priority,checklist,dueDate,vp}
         const token = localStorage.getItem("token");
       
         axios.defaults.headers.common["Authorization"] = token;
@@ -39,6 +39,25 @@ export const getdata =async(duration,section)=>{
         axios.defaults.headers.common["Authorization"] = token;
         const response = await axios.get(reqUrl);
         return response;
+        
+
+    } catch (error) {
+        
+    console.log(error)
+    }
+
+
+};
+export const updatesection =async({id,newsection})=>{
+    try {
+        const reqUrl = `${backendUrl}/api/v1/board/updatesection`;
+        const reqpayload={id,newsection}
+        const token = localStorage.getItem("token");
+
+        
+        axios.defaults.headers.common["Authorization"] = token;
+        const response = await axios.put(reqUrl,reqpayload);
+        return response.data;
         
 
     } catch (error) {

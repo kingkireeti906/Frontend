@@ -7,11 +7,16 @@ import Popup from '../Popup/Popup';
 import { getdata } from '../../../Apis/board';
 import Card from '../Card/Card';
 
+
 function Board() {
     const username = localStorage.getItem('username');
     const [selectedOption, setSelectedOption] = useState('week');
     const [popup, setPopup] = useState(false);
     const [cards, setCards] = useState([]);
+    const [Backlogcards, BacklogsetCards] = useState([]);
+    const [Inprogresscards, InprogresssetCards] = useState([]);
+    const [Donecards, DonesetCards] = useState([]);
+
     const [vpdata,setvpdata]= useState([]);
   
     
@@ -52,6 +57,7 @@ function Board() {
 
     const handleSaveData=(vp)=>{
         setvpdata(vp);
+        console.log(`lavaas vp is ${vp}`)
 
     }
     
@@ -63,6 +69,7 @@ function Board() {
     const fetching = async () => {
         try {
             const response = await getdata(selectedOption, "To do");
+            
     
             console.log("Full API response:", response);
     
@@ -83,14 +90,86 @@ function Board() {
         }
     };
     
-   
+    const fetching2 = async () => {
+        try {
+            const response = await getdata(selectedOption, "Backlog");
+            
+    
+            console.log("Full API Backlog response:", response);
+    
+            if (response.data && response.data.data && Array.isArray(response.data.data)) {
+                // Directly set the state with the array
+                BacklogsetCards(prevCards => {
+                    console.log("Previous Cards:", prevCards);
+                    const updatedCards = response.data.data;
+                    console.log("Updated Cards:", updatedCards);
+                    return updatedCards;
+                });
+                
+            } else {
+                console.error("Invalid response format. Expected an array.", response);
+            }
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+    };
+    const fetching3 = async () => {
+        try {
+            const response = await getdata(selectedOption, "In progress");
+            
+    
+            console.log("Full API In progress response:", response);
+    
+            if (response.data && response.data.data && Array.isArray(response.data.data)) {
+                // Directly set the state with the array
+                InprogresssetCards(prevCards => {
+                    console.log("Previous Cards:", prevCards);
+                    const updatedCards = response.data.data;
+                    console.log("Updated Cards:", updatedCards);
+                    return updatedCards;
+                });
+                
+            } else {
+                console.error("Invalid response format. Expected an array.", response);
+            }
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+    };
+    const fetching4 = async () => {
+        try {
+            const response = await getdata(selectedOption, "Done");
+            
+    
+            console.log("Full API Done response:", response);
+    
+            if (response.data && response.data.data && Array.isArray(response.data.data)) {
+                // Directly set the state with the array
+                DonesetCards(prevCards => {
+                    console.log("Previous Cards:", prevCards);
+                    const updatedCards = response.data.data;
+                    console.log("Updated Cards:", updatedCards);
+                    return updatedCards;
+                });
+                
+            } else {
+                console.error("Invalid response format. Expected an array.", response);
+            }
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+    };
     
     useEffect(() => {
-        console.log("cards store is:", cards);
+        
+      
     }, [cards]); // Log whenever 'cards' state changes
     
     useEffect(() => {
         fetching();
+        fetching2();
+        fetching3();
+        fetching4();
     }, [selectedOption]);
     
   
@@ -117,6 +196,28 @@ function Board() {
                     <div className={styles.headingSection}>
                         <p className={styles.heading}>Backlog</p>
                         <img src={collapseIcon} alt='collapse_icon' className={styles.collapse} />
+                       
+
+                </div>
+                <div className={styles.cardContainer}>
+                    {Backlogcards.map((data, index) => {
+ 
+    return (
+        <Card
+            key={index}
+            priority={data.priority}
+            title={data.title}
+            checklistItems={data.checklist}
+            dueDate={data.dueDate}
+            vp={data.vp}
+            id ={data._id}
+            onMoveToBacklog={() => console.log('Move to backlog')}
+            onMoveToInProgress={() => console.log('Move to in progress')}
+            onMoveToDone={() => console.log('Move to done')}
+        />
+        
+    );
+})}
                     </div>
                 </div>
                 <div className={styles.todo}>
@@ -124,6 +225,7 @@ function Board() {
                         <p className={styles.heading}>To do</p>
                         <img src={plus} alt='plus_icon' className={styles.plus} onClick={handleClick}/>
                         <img src={collapseIcon} alt='collapse_icon' className={styles.collapse} />
+                    
                     </div>
                     <div className={styles.cardContainer}>
                     {cards.map((data, index) => {
@@ -135,11 +237,13 @@ function Board() {
             title={data.title}
             checklistItems={data.checklist}
             dueDate={data.dueDate}
-            vp={vpdata}
+            vp={data.vp}
+            id ={data._id}
             onMoveToBacklog={() => console.log('Move to backlog')}
             onMoveToInProgress={() => console.log('Move to in progress')}
             onMoveToDone={() => console.log('Move to done')}
         />
+        
     );
 })}
 
@@ -150,12 +254,48 @@ function Board() {
                         <p className={styles.heading}>In progress</p>
                         <img src={collapseIcon} alt='collapse_icon' className={styles.collapse} />
                     </div>
+                    {Inprogresscards.map((data, index) => {
+ 
+ return (
+     <Card
+         key={index}
+         priority={data.priority}
+         title={data.title}
+         checklistItems={data.checklist}
+         dueDate={data.dueDate}
+         vp={data.vp}
+         id ={data._id}
+         onMoveToBacklog={() => console.log('Move to backlog')}
+         onMoveToInProgress={() => console.log('Move to in progress')}
+         onMoveToDone={() => console.log('Move to done')}
+     />
+     
+ );
+})}
                 </div>
                 <div className={styles.done}>
                     <div  className={styles.headingSection}>
                         <p className={styles.heading}>Done</p>
                         <img src={collapseIcon} alt='collapse_icon' className={styles.collapse} />
                     </div>
+                    {Donecards.map((data, index) => {
+ 
+ return (
+     <Card
+         key={index}
+         priority={data.priority}
+         title={data.title}
+         checklistItems={data.checklist}
+         dueDate={data.dueDate}
+         vp={data.vp}
+         id ={data._id}
+         onMoveToBacklog={() => console.log('Move to backlog')}
+         onMoveToInProgress={() => console.log('Move to in progress')}
+         onMoveToDone={() => console.log('Move to done')}
+     />
+     
+ );
+})}
                 </div>
             </div>
             {popup && <Popup onClose={handleClose} onSave={handleSaveData} />}

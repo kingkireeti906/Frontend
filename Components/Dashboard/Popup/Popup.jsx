@@ -102,12 +102,15 @@ function PopUp({ onClose,onSave}) {
         const checkedInputFields = inputFields.filter(field => field.checked); // Filter out checked input fields
         const checklisted = checkedInputFields.map(field => field.value); 
      const vp = checklisted;
+     
         const savedData = {
             title: data.title,
             priority: selectedPriority,
             checklist: checklist,
             dueDate: dueDate ? dueDate.toLocaleDateString('en-US') :null,
+            vp:checklisted
         };
+        console.log(savedData);
     
         const response = await create({...savedData});
       
@@ -115,7 +118,7 @@ function PopUp({ onClose,onSave}) {
     console.log(`vp is ${vp}`);
         // Call onSave prop if available
         if (onSave) {
-            onSave(vp);
+            onSave();
         }
     
         // Close the popup

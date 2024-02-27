@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
-
+ 
 .boardContainer {
     display: flex;
     flex-direction: column;
 }
-
+ 
 .welcome {
     height: 0.93rem;
     margin-top: 1.5rem;
@@ -20,12 +20,12 @@
     text-align: left;
     color: #000;
 }
-
+ 
 .dateContainer {
     display: flex;
     justify-content: flex-end;
 }
-
+ 
 .date {
     margin: 0%;
     margin-right: 2rem;
@@ -38,7 +38,7 @@
     letter-spacing: normal;
     color: #707070;
 }
-
+ 
 .optionsContainer {
     width: 100%;
     display: flex;
@@ -46,7 +46,7 @@
     align-items: center;
     padding-top: 1rem;
 }
-
+ 
 .head {
     padding-left: 2rem;
     font-family: "Poppins", sans-serif;
@@ -58,7 +58,7 @@
     letter-spacing: normal;
     color: #000;
 }
-
+ 
 .options select {
     margin-right: 2rem;
     border: none;
@@ -72,7 +72,7 @@
     text-align: center;
     color: #000;
 }
-
+ 
 .sectionContainer {
     margin: 2rem 0rem 2rem 2rem;
     display: flex;
@@ -80,33 +80,38 @@
     margin-bottom: 2rem; 
     width: calc(100% - 2rem); 
 }
-
+ 
 .backlog,
 .todo,
 .inProgress,
 .done {
-    width: 18vw;
+    display: flex;
+    flex-direction: column;
+    width:20vw;
     height:70vh;
     margin: 0 1.5rem 0 0;
     padding: 1rem;
     border-radius:0.7rem;
     background-color: #eef2f5;
     overflow-y: auto;
+    overflow-x: hidden;
     flex-shrink: 0; 
 }
-
+ 
 .headingSection {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.8rem;
 }
-
+ 
 .collapse {
     width: 2rem;
     height: 2rem;
-    margin-top:0.5rem;
+    /* margin-top:0.5rem; */
 }
-
+ 
 .heading {
     font-family: "Poppins", sans-serif;
     font-size: 1rem;
@@ -118,11 +123,11 @@
     text-align: left;
     color: #000;
 }
-
+ 
 .plus{
     width:1.3rem;
     height:1.3rem;
-    margin-top:0.7rem;
+    /* margin-top:0.7rem; */
     margin-left:auto;
     margin-right:1rem;
 }
