@@ -67,3 +67,18 @@ export const updatesection =async({id,newsection})=>{
 
 
 };
+export const getUserData = async (_id)=>{
+    try {
+        console.log(_id)
+        const reqUrl = `${backendUrl}/api/v1/board/edit/${_id}`;
+        const response = await axios.get (reqUrl);
+        console.log(response)
+        return response
+
+       
+
+    } catch (error) {
+        console.log(error)
+        
+    }
+}

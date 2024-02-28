@@ -3,7 +3,10 @@ import styles from './Card.module.css';
 import dots from '../../../src/assets/Icons/dots.png';
 import down from '../../../src/assets/Icons/down.jpeg';
 import up from '../../../src/assets/Icons/up.jpeg';
-import { updatesection } from '../../../Apis/board'
+import { updatesection } from '../../../Apis/board';
+import Delete from '../Delete/Delete';
+import {getUserData} from '../../../Apis/board';
+import EditpopUp from '../Editpopup/Editpopup';
 
 function Card({ priority, title, id, checklistItems, dueDate, vp, onMoveToBacklog, onMoveToInProgress, onMoveToDone, updateChecklist }) {
     const formattedDueDate = dueDate ? formatDate(dueDate) : null;
@@ -12,6 +15,37 @@ function Card({ priority, title, id, checklistItems, dueDate, vp, onMoveToBacklo
     const [checkedCount, setCheckedCount] = useState(0);
     const [checkedItems, setCheckedItems] = useState(new Set());
     const [data, setupdate] = useState({ id: '', newsection: '' });
+    const [arrowimage,setArrow]=useState(down);
+    const [showOptions, setShowOptions] = useState(false);
+    const [showDeletePopup, setShowDeletePopup] = useState(false);
+    const [editData, setEditData] = useState([]);
+    const [edit ,setEdit]= useState(false);
+    const handleeditClick=async (_id)=>{
+        setEdit(true);
+        const response =await getUserData(_id);
+        setEditData(response.data)
+        console.log(editData)
+    }
+    const handleDelete = () => {
+        // Perform delete operation here
+        setShowDeletePopup(false); // Hide delete popup after deletion
+      };
+ 
+      const handleCancelDelete = () => {
+        setShowDeletePopup(false); // Hide delete popup if cancelled
+      };
+ 
+    const handleOptionClick = (option) => {
+        // Handle option click here
+        console.log(option);
+        if (option === 'Delete') {
+            setShowOptions(false); 
+            setShowDeletePopup(true); // Show delete popup when delete option is clicked
+          }
+    };
+    const toggleOptions = () => {
+        setShowOptions(!showOptions);
+    };
 
 
     const changesection = (id, newsection) => {
@@ -34,7 +68,10 @@ function Card({ priority, title, id, checklistItems, dueDate, vp, onMoveToBacklo
     
         fetchData();
     }, [data]);
-    
+    const handleCloseEditPopup = () => {
+        setEdit(false); // Set edit to false to hide the EditpopUp component
+        setShowOptions(false); // Set showOptions to false when EditpopUp is closed
+    };
 
     useEffect(() => {
         // Set default checked items only when the component mounts
@@ -45,26 +82,27 @@ function Card({ priority, title, id, checklistItems, dueDate, vp, onMoveToBacklo
 
     const toggleChecklist = () => {
         setShowChecklist(!showChecklist);
+        setArrow(showChecklist ? down : up);
     };
 
-    const handleCheckboxChange = (item) => {
-        // This function will handle user interaction with checkboxes
-        const isChecked = checkedItems.has(item);
+    // const handleCheckboxChange = (item) => {
+    //     // This function will handle user interaction with checkboxes
+    //     const isChecked = checkedItems.has(item);
 
-        if (!isChecked) {
-            setCheckedItems((prev) => new Set([...prev, item]));
-            setCheckedCount((prev) => prev + 1);
-            updateChecklist((prev) => prev + 1);
-        } else {
-            setCheckedItems((prev) => {
-                const newSet = new Set(prev);
-                newSet.delete(item);
-                return newSet;
-            });
-            setCheckedCount((prev) => prev - 1);
-            updateChecklist((prev) => prev - 1);
-        }
-    };
+    //     if (!isChecked) {
+    //         setCheckedItems((prev) => new Set([...prev, item]));
+    //         setCheckedCount((prev) => prev + 1);
+    //         updateChecklist((prev) => prev + 1);
+    //     } else {
+    //         setCheckedItems((prev) => {
+    //             const newSet = new Set(prev);
+    //             newSet.delete(item);
+    //             return newSet;
+    //         });
+    //         setCheckedCount((prev) => prev - 1);
+    //         updateChecklist((prev) => prev - 1);
+    //     }
+    // };
 
     function formatDate(dueDate) {
         if (!dueDate) {
@@ -122,17 +160,29 @@ function Card({ priority, title, id, checklistItems, dueDate, vp, onMoveToBacklo
 
     return (
         <div className={styles.card}>
+           
             <div className={styles.cardHeader}>
+                <div className={styles.subcard}>
+                {showOptions && (
+                    <div className={styles.options}>
+                        <div onClick={() => handleeditClick(id)} className={styles.edit}>Edit</div>
+                        <div onClick={() => handleOptionClick('Share')} className={styles.share}>Share</div>
+                        <div onClick={() => handleOptionClick('Delete')} className={styles.delete}>Delete</div>
+                       
+                    </div>
+                )}
+                </div>
+           
                 <div className={`${styles.color} ${colorClass}`}></div>
                 <span className={styles.priority}>{priority}</span>
-                <img src={dots} alt='dots_icon' className={styles.dots} />
+                <img src={dots} alt='dots_icon' className={styles.dots} onClick={toggleOptions} />
             </div>
             <span className={styles.title}>{title}</span>
             <div className={styles.checklist}>
                 <div className={styles.arrow}>
                     <p className={styles.checklistTitle}>Checklist ({checkedCount}/{checklistItems ? checklistItems.length : 0})</p>
                     <div>
-                        <img src={down} alt='down_arrow_icon' className={styles.down} onClick={toggleChecklist} />
+                        <img src={arrowimage} alt='down_arrow_icon' className={styles.down} onClick={toggleChecklist} />
                     </div>
                 </div>
                 {showChecklist && (
@@ -167,6 +217,8 @@ function Card({ priority, title, id, checklistItems, dueDate, vp, onMoveToBacklo
                     <button onClick={() => changesection(id, 'Done')} className={styles.done}>Done</button>
 
                 </div>
+                {showDeletePopup && <Delete onCancel={handleCancelDelete} onDelete={handleDelete}/>}
+                {edit && <EditpopUp editData={editData}onClose={handleCloseEditPopup} />}
             </div>
         </div>
     );

@@ -176,5 +176,51 @@
     border: 1px solid #63c05b;
 }
  
- 
+ .subcard{
+    display: flex;
+    /* justify-content: end; */
+    align-items: end;
+    position: relative;
+    left: 36%;
+ }
 /* Add any other styles you need */
+.options {
+    position: absolute;
+    /* margin-left: auto;  */
+
+    top:35%;
+   
+    width: 8rem;
+    height: 6rem;
+    display: flex;
+    /* align-self:flex-end ; */
+    flex-direction: column;
+    justify-content: center;
+    align-items:self-start;
+    padding-left: 1rem;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 1rem;
+    margin-right: 1rem;
+    /* z-index: 10; */
+}
+ 
+ 
+ 
+.edit,
+.share,
+.delete {
+    font-size: 1rem;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #000;
+}
+ 
+.delete {
+    color: #cf3636;
+}

@@ -57,7 +57,7 @@ function Board() {
 
     const handleSaveData=(vp)=>{
         setvpdata(vp);
-        console.log(`lavaas vp is ${vp}`)
+      
 
     }
     
@@ -71,14 +71,14 @@ function Board() {
             const response = await getdata(selectedOption, "To do");
             
     
-            console.log("Full API response:", response);
+           
     
             if (response.data && response.data.data && Array.isArray(response.data.data)) {
                 // Directly set the state with the array
                 setCards(prevCards => {
-                    console.log("Previous Cards:", prevCards);
+                   
                     const updatedCards = response.data.data;
-                    console.log("Updated Cards:", updatedCards);
+               
                     return updatedCards;
                 });
                 
@@ -95,14 +95,16 @@ function Board() {
             const response = await getdata(selectedOption, "Backlog");
             
     
-            console.log("Full API Backlog response:", response);
+          
+
+
     
             if (response.data && response.data.data && Array.isArray(response.data.data)) {
                 // Directly set the state with the array
                 BacklogsetCards(prevCards => {
-                    console.log("Previous Cards:", prevCards);
+                    // console.log("Previous Cards:", prevCards);
                     const updatedCards = response.data.data;
-                    console.log("Updated Cards:", updatedCards);
+                    // console.log("Updated Cards:", updatedCards);
                     return updatedCards;
                 });
                 
@@ -118,14 +120,14 @@ function Board() {
             const response = await getdata(selectedOption, "In progress");
             
     
-            console.log("Full API In progress response:", response);
+          
     
             if (response.data && response.data.data && Array.isArray(response.data.data)) {
                 // Directly set the state with the array
                 InprogresssetCards(prevCards => {
-                    console.log("Previous Cards:", prevCards);
+                    // console.log("Previous Cards:", prevCards);
                     const updatedCards = response.data.data;
-                    console.log("Updated Cards:", updatedCards);
+                    // console.log("Updated Cards:", updatedCards);
                     return updatedCards;
                 });
                 
@@ -141,12 +143,12 @@ function Board() {
             const response = await getdata(selectedOption, "Done");
             
     
-            console.log("Full API Done response:", response);
+            // console.log("Full API Done response:", response);
     
             if (response.data && response.data.data && Array.isArray(response.data.data)) {
                 // Directly set the state with the array
                 DonesetCards(prevCards => {
-                    console.log("Previous Cards:", prevCards);
+                    // console.log("Previous Cards:", prevCards);
                     const updatedCards = response.data.data;
                     console.log("Updated Cards:", updatedCards);
                     return updatedCards;
