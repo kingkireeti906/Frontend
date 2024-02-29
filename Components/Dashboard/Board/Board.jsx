@@ -16,6 +16,10 @@ function Board() {
     const [Backlogcards, BacklogsetCards] = useState([]);
     const [Inprogresscards, InprogresssetCards] = useState([]);
     const [Donecards, DonesetCards] = useState([]);
+    const [todoCollapsed, setTodoCollapsed] = useState(false);
+    const [backlogCollapsed, setBacklogCollapsed] = useState(false); 
+    const [progressCollapse, setProgressCollapse] = useState(false); 
+    const [doneCollapse, setDoneCollapse] = useState(false);
 
     const [vpdata,setvpdata]= useState([]);
   
@@ -162,6 +166,21 @@ function Board() {
         }
     };
     
+    const toggleCollapseAll = () => {
+        setTodoCollapsed(!todoCollapsed);
+    };
+
+    const toggleBacklogCollapse = () => {
+        setBacklogCollapsed(!backlogCollapsed);
+    };
+
+    const toggleProgressCollapse = () => {
+        setProgressCollapse(!progressCollapse);
+    };
+
+    const toggleDoneCollapse = () => {
+        setDoneCollapse(!doneCollapse);
+    };
     useEffect(() => {
         
       
@@ -197,7 +216,7 @@ function Board() {
                 <div className={styles.backlog}>
                     <div className={styles.headingSection}>
                         <p className={styles.heading}>Backlog</p>
-                        <img src={collapseIcon} alt='collapse_icon' className={styles.collapse} />
+                        <img src={collapseIcon} alt='collapse_icon' className={styles.collapse} onClick={toggleBacklogCollapse}/>
                        
 
                 </div>
@@ -216,6 +235,8 @@ function Board() {
             onMoveToBacklog={() => console.log('Move to backlog')}
             onMoveToInProgress={() => console.log('Move to in progress')}
             onMoveToDone={() => console.log('Move to done')}
+            currentSection='Backlog'
+            isCollapsed={backlogCollapsed}
         />
         
     );
@@ -226,7 +247,7 @@ function Board() {
                     <div  className={styles.headingSection}>
                         <p className={styles.heading}>To do</p>
                         <img src={plus} alt='plus_icon' className={styles.plus} onClick={handleClick}/>
-                        <img src={collapseIcon} alt='collapse_icon' className={styles.collapse} />
+                        <img src={collapseIcon} alt='collapse_icon' className={styles.collapse}onClick={toggleCollapseAll} />
                     
                     </div>
                     <div className={styles.cardContainer}>
@@ -241,9 +262,9 @@ function Board() {
             dueDate={data.dueDate}
             vp={data.vp}
             id ={data._id}
-            onMoveToBacklog={() => console.log('Move to backlog')}
-            onMoveToInProgress={() => console.log('Move to in progress')}
-            onMoveToDone={() => console.log('Move to done')}
+            currentSection='To do'
+            isCollapsed={todoCollapsed}
+
         />
         
     );
@@ -254,7 +275,7 @@ function Board() {
                 <div className={styles.inProgress}>
                     <div  className={styles.headingSection}>
                         <p className={styles.heading}>In progress</p>
-                        <img src={collapseIcon} alt='collapse_icon' className={styles.collapse} />
+                        <img src={collapseIcon} alt='collapse_icon' className={styles.collapse}onClick={toggleProgressCollapse} />
                     </div>
                     {Inprogresscards.map((data, index) => {
  
@@ -270,6 +291,8 @@ function Board() {
          onMoveToBacklog={() => console.log('Move to backlog')}
          onMoveToInProgress={() => console.log('Move to in progress')}
          onMoveToDone={() => console.log('Move to done')}
+         currentSection="In Progress"
+         isCollapsed={progressCollapse}
      />
      
  );
@@ -278,7 +301,7 @@ function Board() {
                 <div className={styles.done}>
                     <div  className={styles.headingSection}>
                         <p className={styles.heading}>Done</p>
-                        <img src={collapseIcon} alt='collapse_icon' className={styles.collapse} />
+                        <img src={collapseIcon} alt='collapse_icon' className={styles.collapse}onClick={toggleDoneCollapse} />
                     </div>
                     {Donecards.map((data, index) => {
  
@@ -294,6 +317,9 @@ function Board() {
          onMoveToBacklog={() => console.log('Move to backlog')}
          onMoveToInProgress={() => console.log('Move to in progress')}
          onMoveToDone={() => console.log('Move to done')}
+         currentSection="Done"
+         isCollapsed={doneCollapse}
+
      />
      
  );

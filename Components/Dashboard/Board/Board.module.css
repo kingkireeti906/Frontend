@@ -4,6 +4,7 @@
 .boardContainer {
     display: flex;
     flex-direction: column;
+    
 }
  
 .welcome {
@@ -74,12 +75,36 @@
 }
  
 .sectionContainer {
-    margin: 2rem 0rem 2rem 2rem;
+    margin: 2rem 0rem 0rem 2rem;
     display: flex;
     overflow-x: auto;
-    margin-bottom: 2rem; 
-    width: calc(100% - 2rem); 
+    padding-bottom: 0.5rem;
+    
+    }
+  ::-webkit-scrollbar {
+    width: 0.6vw;
+    background-color:#d6eaf4; 
+    height: auto;
+  }
+::-webkit-scrollbar-thumb {
+    border-radius: 0.8rem;
+  
+    background-color: rgba(141, 170, 185, 0.8);
 }
+::-webkit-scrollbar {
+    scrollbar-width: thin;
+   
+
+   
+  }
+  
+  
+
+
+
+
+
+
  
 .backlog,
 .todo,
@@ -90,7 +115,7 @@
     width:20vw;
     height:70vh;
     margin: 0 1.5rem 0 0;
-    padding: 1rem;
+    padding: 1.2rem;
     border-radius:0.7rem;
     background-color: #eef2f5;
     overflow-y: auto;
@@ -131,3 +156,7 @@
     margin-left:auto;
     margin-right:1rem;
 }
+
+
+
+

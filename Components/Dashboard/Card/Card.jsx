@@ -8,7 +8,7 @@ import Delete from '../Delete/Delete';
 import {getUserData} from '../../../Apis/board';
 import EditpopUp from '../Editpopup/Editpopup';
 
-function Card({ priority, title, id, checklistItems, dueDate, vp, onMoveToBacklog, onMoveToInProgress, onMoveToDone, updateChecklist }) {
+function Card({ priority, title, id, checklistItems, dueDate, vp,currentSection ,isCollapsed}) {
     const formattedDueDate = dueDate ? formatDate(dueDate) : null;
 
     const [showChecklist, setShowChecklist] = useState(false);
@@ -68,6 +68,13 @@ function Card({ priority, title, id, checklistItems, dueDate, vp, onMoveToBacklo
     
         fetchData();
     }, [data]);
+    useEffect(() => {
+        if (isCollapsed) {
+            setShowChecklist(false);
+            setArrow(down);
+        }
+    }, [isCollapsed]);
+  
     const handleCloseEditPopup = () => {
         setEdit(false); // Set edit to false to hide the EditpopUp component
         setShowOptions(false); // Set showOptions to false when EditpopUp is closed
@@ -204,19 +211,60 @@ function Card({ priority, title, id, checklistItems, dueDate, vp, onMoveToBacklo
 
             </div>
             <div className={styles.cardFooter}>
-                {formattedDueDate && (
+                {/* {formattedDueDate && (
+                    <button className={`${styles.dueDate} ${isDueDatePassed ? styles.dueDateRed : ''}`}>
+                        {formattedDueDate}
+                    </button>
+                )} */}
+                {formattedDueDate && currentSection!=='Done' &&(
                     <button className={`${styles.dueDate} ${isDueDatePassed ? styles.dueDateRed : ''}`}>
                         {formattedDueDate}
                     </button>
                 )}
-                <div className={styles.sectionButtons}>
+                   {formattedDueDate && currentSection==='Done' && (
+                    <button className={`${styles.dueDate} ${isDueDatePassed ? styles.dueDateRed : styles.dueDateGreen}`}>
+                        {formattedDueDate}
+                    </button>
+                )}
+                {/* <div className={styles.sectionButtons}>
 
                     <button onClick={() => changesection(id, 'Backlog')} className={styles.backlog}>Backlog</button>
                     <button onClick={() => changesection(id, 'In progress')} className={styles.inProgress}>Progress</button>
 
                     <button onClick={() => changesection(id, 'Done')} className={styles.done}>Done</button>
 
-                </div>
+                </div> */}
+                
+                {currentSection === 'Backlog' && (
+                        <div className={styles.sectionButtons}>        
+                            <button  className={styles.inProgress} onClick={() => changesection(id, 'In progress')}>PROGRESS</button>
+                            <button  className={styles.todo}onClick={() => changesection(id, 'To do')}>TO-DO</button>
+                            <button  className={styles.done}onClick={() => changesection(id, 'Done')}>DONE</button>
+                        </div>
+ 
+                    )}
+                    {currentSection === 'To do' && (
+                         <div className={styles.sectionButtons}>  
+                             <button className={styles.backlog}onClick={() => changesection(id, 'Backlog')}>BACKLOG</button>
+                            <button className={styles.inProgress} onClick={() => changesection(id, 'In progress')}>PROGRESS</button>
+                            <button  className={styles.done}onClick={() => changesection(id, 'Done')}>DONE</button>
+                        </div>
+                    )}
+                    {currentSection === 'In Progress' && (
+                         <div className={styles.sectionButtons}>  
+                            <button className={styles.backlog}onClick={() => changesection(id, 'Backlog')}>BACKLOG</button>
+                            <button  className={styles.todo}onClick={() => changesection(id, 'To do')}>TO-DO</button>
+                            <button  className={styles.done}onClick={() => changesection(id, 'Done')}>DONE</button>
+                        </div>
+                    )}
+                    {currentSection === 'Done' && (
+                        <div className={styles.sectionButtons}>  
+                            <button className={styles.backlog}onClick={() => changesection(id, 'Backlog')}>BACKLOG</button>
+                            <button className={styles.todo}onClick={() => changesection(id, 'To do')}>TO-DO</button>
+                            <button  className={styles.inProgress} onClick={() => changesection(id, 'In progress')}>PROGRESS</button>
+                        </div>
+                    )}
+               
                 {showDeletePopup && <Delete onCancel={handleCancelDelete} onDelete={handleDelete} _id={id}/>}
                 {edit && <EditpopUp editData={editData}onClose={handleCloseEditPopup}vp={vp} _id={id} />}
             </div>
