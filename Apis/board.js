@@ -82,3 +82,47 @@ export const getUserData = async (_id)=>{
         
     }
 }
+export const updateEditData = async ({ _id }, { title, priority, checklist, dueDate, vp }) => {
+    try {
+      const reqUrl = `${backendUrl}/api/v1/board/edit/${_id}`;
+      const reqPayload = { title, priority, checklist, dueDate, vp };
+      const token = localStorage.getItem("token");
+  
+      axios.defaults.headers.common["Authorization"] = token;
+  
+      const response = await axios.put(reqUrl, reqPayload);
+  
+      if (response.status === 200) {
+        console.log("Data updated successfully:", response.data);
+        return response.data;
+      } else {
+        console.error("Failed to update data. Server returned:", response.status, response.data);
+        throw new Error("Failed to update data");
+      }
+    } catch (error) {
+      console.error("Failed to fetch analytics data", error);
+      throw new Error("Failed to fetch analytics data"); // You can customize the error message
+    }
+  };
+  export const deleteData = async ( {_id }) => {
+    try {
+      const reqUrl = `${backendUrl}/api/v1/board/delete/${_id}`;
+      
+      const token = localStorage.getItem("token");
+  
+      axios.defaults.headers.common["Authorization"] = token;
+  
+      const response = await axios.delete(reqUrl);
+  
+      if (response.status === 200) {
+        console.log("Data deleted successfully:");
+        return response.data;
+      } else {
+        console.error("Failed to update data. Server returned:", response.status);
+        throw new Error("Failed to update data");
+      }
+    } catch (error) {
+      console.error("Failed to fetch analytics data", error);
+      throw new Error("Failed to fetch analytics data"); // You can customize the error message
+    }
+  };

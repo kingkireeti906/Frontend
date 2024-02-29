@@ -11,10 +11,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1;
 }
 
 .popup_container {
-    /* position: relative; */
+   
     display: flex;
     flex-direction: column;
     position: fixed;
@@ -28,6 +29,8 @@
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 1rem;
+
+    /* z-index: 1001; */
 }
 
 .asterisk {

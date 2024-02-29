@@ -217,8 +217,8 @@ function Card({ priority, title, id, checklistItems, dueDate, vp, onMoveToBacklo
                     <button onClick={() => changesection(id, 'Done')} className={styles.done}>Done</button>
 
                 </div>
-                {showDeletePopup && <Delete onCancel={handleCancelDelete} onDelete={handleDelete}/>}
-                {edit && <EditpopUp editData={editData}onClose={handleCloseEditPopup} />}
+                {showDeletePopup && <Delete onCancel={handleCancelDelete} onDelete={handleDelete} _id={id}/>}
+                {edit && <EditpopUp editData={editData}onClose={handleCloseEditPopup}vp={vp} _id={id} />}
             </div>
         </div>
     );
