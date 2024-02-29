@@ -126,3 +126,26 @@ export const updateEditData = async ({ _id }, { title, priority, checklist, dueD
       throw new Error("Failed to fetch analytics data"); // You can customize the error message
     }
   };
+// Notice the change in the function signature: parameters are now directly destructured
+export const updatevp = async ({ id }, vp) => {
+  try {
+    const reqUrl = `${backendUrl}/api/v1/board/checkboxes/${id}`;
+    const reqPayload = { vp };
+    const token = localStorage.getItem("token");
+
+    axios.defaults.headers.common["Authorization"] = token;
+
+    const response = await axios.put(reqUrl, reqPayload);
+
+    if (response.status === 200) {
+      console.log("Data updated successfully:", response.data);
+      return response.data;
+    } else {
+      console.error("Failed to update data. Server returned:", response.status, response.data);
+      throw new Error("Failed to update data");
+    }
+  } catch (error) {
+    console.error("Failed to fetch analytics data", error);
+    throw new Error("Failed to fetch analytics data"); // You can customize the error message
+  }
+};

@@ -7,6 +7,7 @@ import { updatesection } from '../../../Apis/board';
 import Delete from '../Delete/Delete';
 import {getUserData} from '../../../Apis/board';
 import EditpopUp from '../Editpopup/Editpopup';
+import {updatevp} from '../../../Apis/board';
 
 function Card({ priority, title, id, checklistItems, dueDate, vp,currentSection ,isCollapsed}) {
     const formattedDueDate = dueDate ? formatDate(dueDate) : null;
@@ -20,6 +21,7 @@ function Card({ priority, title, id, checklistItems, dueDate, vp,currentSection 
     const [showDeletePopup, setShowDeletePopup] = useState(false);
     const [editData, setEditData] = useState([]);
     const [edit ,setEdit]= useState(false);
+    const [checkedItemsAfterRender, setCheckedItemsAfterRender] = useState([]);
     const handleeditClick=async (_id)=>{
         setEdit(true);
         const response =await getUserData(_id);
@@ -79,38 +81,51 @@ function Card({ priority, title, id, checklistItems, dueDate, vp,currentSection 
         setEdit(false); // Set edit to false to hide the EditpopUp component
         setShowOptions(false); // Set showOptions to false when EditpopUp is closed
     };
+  const handleCheckboxChange = async (item) => {
+  const isChecked = checkedItems.has(item);
+
+  setCheckedItemsAfterRender(Array.from(checkedItems));
+
+  try {
+    // Make sure updatevp is an asynchronous function
+const response = await updatevp({ id }, Array.from(checkedItems));
+
+    console.log(response);
+  } catch (error) {
+    console.error("Error updating vp:", error);
+  }
+
+  if (!isChecked) {
+    setCheckedItems((prev) => new Set([...prev, item]));
+    setCheckedCount((prev) => prev + 1);
+    updateChecklist((prev) => prev + 1);
+  } else {
+    setCheckedItems((prev) => {
+      const newSet = new Set(prev);
+      newSet.delete(item);
+      return newSet;
+    });
+    setCheckedCount((prev) => prev - 1);
+    updateChecklist((prev) => prev - 1);
+  }
+};
 
     useEffect(() => {
         // Set default checked items only when the component mounts
-        const defaultCheckedItems = checklistItems.filter(item => vp.includes(item.trim()));
+        const defaultCheckedItems = checklistItems.filter((item) => vp.includes(item.trim()));
         setCheckedItems(new Set(defaultCheckedItems));
         setCheckedCount(defaultCheckedItems.length);
-    }, [vp, checklistItems]);
+    
+        // Store the checked items after the component renders
+        setCheckedItemsAfterRender(defaultCheckedItems);
+      }, [vp, checklistItems]);
 
     const toggleChecklist = () => {
         setShowChecklist(!showChecklist);
         setArrow(showChecklist ? down : up);
     };
 
-    // const handleCheckboxChange = (item) => {
-    //     // This function will handle user interaction with checkboxes
-    //     const isChecked = checkedItems.has(item);
-
-    //     if (!isChecked) {
-    //         setCheckedItems((prev) => new Set([...prev, item]));
-    //         setCheckedCount((prev) => prev + 1);
-    //         updateChecklist((prev) => prev + 1);
-    //     } else {
-    //         setCheckedItems((prev) => {
-    //             const newSet = new Set(prev);
-    //             newSet.delete(item);
-    //             return newSet;
-    //         });
-    //         setCheckedCount((prev) => prev - 1);
-    //         updateChecklist((prev) => prev - 1);
-    //     }
-    // };
-
+  
     function formatDate(dueDate) {
         if (!dueDate) {
             return ''; // Handle null or undefined dueDate
@@ -164,6 +179,7 @@ function Card({ priority, title, id, checklistItems, dueDate, vp,currentSection 
 
     // Determine if the due date has passed
     const isDueDatePassed = dueDate ? new Date(dueDate) < new Date() : false;
+    
 
     return (
         <div className={styles.card}>
@@ -196,13 +212,14 @@ function Card({ priority, title, id, checklistItems, dueDate, vp,currentSection 
     <div className={styles.checklistItems}>
         {checklistItems.map((item, index) => (
             <div key={index} className={styles.inputfieldsBox}>
-                <input
-                    type="checkbox"
-                    className={styles.checkBox}
-                    id={`checkbox-${index}`}
-                    checked={vp.includes(item.trim())}  // Check if the item is in vp
-                    
-                />
+               <input
+    type="checkbox"
+    className={styles.checkBox}
+    id={`checkbox-${index}`}
+    checked={checkedItems.has(item.trim())}
+    onChange={() => handleCheckboxChange(item.trim())}
+/>
+
                 <span className={styles.input}>{item}</span>
             </div>
         ))}
@@ -211,11 +228,7 @@ function Card({ priority, title, id, checklistItems, dueDate, vp,currentSection 
 
             </div>
             <div className={styles.cardFooter}>
-                {/* {formattedDueDate && (
-                    <button className={`${styles.dueDate} ${isDueDatePassed ? styles.dueDateRed : ''}`}>
-                        {formattedDueDate}
-                    </button>
-                )} */}
+             
                 {formattedDueDate && currentSection!=='Done' &&(
                     <button className={`${styles.dueDate} ${isDueDatePassed ? styles.dueDateRed : ''}`}>
                         {formattedDueDate}
@@ -226,14 +239,7 @@ function Card({ priority, title, id, checklistItems, dueDate, vp,currentSection 
                         {formattedDueDate}
                     </button>
                 )}
-                {/* <div className={styles.sectionButtons}>
-
-                    <button onClick={() => changesection(id, 'Backlog')} className={styles.backlog}>Backlog</button>
-                    <button onClick={() => changesection(id, 'In progress')} className={styles.inProgress}>Progress</button>
-
-                    <button onClick={() => changesection(id, 'Done')} className={styles.done}>Done</button>
-
-                </div> */}
+               
                 
                 {currentSection === 'Backlog' && (
                         <div className={styles.sectionButtons}>        
