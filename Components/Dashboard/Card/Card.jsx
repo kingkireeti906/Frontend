@@ -29,11 +29,10 @@ function Card({ priority, title, id, checklistItems, dueDate, vp,currentSection 
     const [edit ,setEdit]= useState(false);
     const [checkedItemsAfterRender, setCheckedItemsAfterRender] = useState([]);
     const baseURL = 'https://kingkireeti906.github.io/Frontend/';
-
     const handlesharelink = (id) => {
-        const url = `${baseURL}/card/${id}`;
+        const url = `${baseURL}card/${id}`;
     
-    
+        naviagte(url);
        
     
         navigator.clipboard
