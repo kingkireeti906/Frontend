@@ -56,7 +56,7 @@ function Card({ priority, title, id, checklistItems, dueDate, vp,currentSection 
     //         });
     // };
     const handlesharelink = (id) => {
-        const url = `{baseURL}/card/${id}`;
+        const url = `${baseURL}/card/${id}`;
             
         navigator.clipboard
             .writeText(url)
