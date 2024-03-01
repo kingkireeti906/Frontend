@@ -11,7 +11,8 @@ import Delete from '../Delete/Delete';
 import {getUserData} from '../../../Apis/board';
 import EditpopUp from '../Editpopup/Editpopup';
 import {updatevp} from '../../../Apis/board';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 function Card({ priority, title, id, checklistItems, dueDate, vp,currentSection ,isCollapsed}) {
     const formattedDueDate = dueDate ? formatDate(dueDate) : null;
@@ -28,9 +29,11 @@ function Card({ priority, title, id, checklistItems, dueDate, vp,currentSection 
     const [edit ,setEdit]= useState(false);
     const [checkedItemsAfterRender, setCheckedItemsAfterRender] = useState([]);
     const baseURL = 'https://kingkireeti906.github.io/Frontend/';
+
     const handlesharelink = (id) => {
-        const url = `{baseurl}/card/${id}`;
-        naviagte(url);
+        const url = `${baseURL}/card/${id}`;
+    
+    
        
     
         navigator.clipboard
