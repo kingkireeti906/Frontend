@@ -9,8 +9,17 @@ function DeletePopup({ onCancel, onDelete,_id }) {
     console.log(response.data)
    
     onDelete()
+    handleRefreshClick();
   
   }
+  const handleRefreshClick = () => {
+    setTimeout(() => {
+      // Call the refresh function after the update
+      window.location.reload();
+    }, 500); // 1000 milliseconds = 1 second
+   
+  };
+  
   return (
     <div className={styles.overlay}>
     <div className={styles.popup_container}>

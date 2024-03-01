@@ -12,6 +12,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1;
 }
  
 .popup_container {
@@ -30,7 +31,10 @@
     padding: 1.3rem;
     border: 1px solid #ccc;
     border-radius: 1rem;
+   
+    
 }
+
  
 .message{
     font-family: "Noto Sans", sans-serif;

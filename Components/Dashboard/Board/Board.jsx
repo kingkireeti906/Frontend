@@ -68,6 +68,7 @@ function Board() {
 
     const handleOptionChange = (event) => {
         setSelectedOption(event.target.value);
+     
     };
    
     const fetching = async () => {
@@ -181,6 +182,7 @@ function Board() {
     const toggleDoneCollapse = () => {
         setDoneCollapse(!doneCollapse);
     };
+   
     useEffect(() => {
         
       
@@ -191,6 +193,7 @@ function Board() {
         fetching2();
         fetching3();
         fetching4();
+      
     }, [selectedOption]);
     
   

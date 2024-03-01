@@ -107,15 +107,33 @@ function Card({ priority, title, id, checklistItems, dueDate, vp,currentSection 
     const toggleOptions = () => {
         setShowOptions(!showOptions);
     };
+    const handleRefreshClick = () => {
+        window.location.reload();
+      };
 
-
-    const changesection = (id, newsection) => {
-        setupdate({
-            ...data,
-            id: id,
-            newsection: newsection
-        });
+    const changesection = async (id, newsection) => {
+        try {
+            // Assuming setupdate returns a promise (or is wrapped in a promise)
+            await setupdate({
+                ...data,
+                id: id,
+                newsection: newsection
+            });
+    
+            // Introduce a delay of 1 second before calling the refresh function
+            setTimeout(() => {
+                // Call the refresh function after the update
+                handleRefreshClick();
+            }, 500); // 1000 milliseconds = 1 second
+        } catch (error) {
+            console.error("Error updating section:", error);
+        }
     };
+    
+    
+   
+    
+    
     
     useEffect(() => {
         const fetchData = async () => {
@@ -135,7 +153,7 @@ function Card({ priority, title, id, checklistItems, dueDate, vp,currentSection 
             setArrow(down);
         }
     }, [isCollapsed]);
-  
+   
     const handleCloseEditPopup = () => {
         setEdit(false); // Set edit to false to hide the EditpopUp component
         setShowOptions(false); // Set showOptions to false when EditpopUp is closed
@@ -157,7 +175,7 @@ const response = await updatevp({ id }, Array.from(checkedItems));
   if (!isChecked) {
     setCheckedItems((prev) => new Set([...prev, item]));
     setCheckedCount((prev) => prev + 1);
-    updateChecklist((prev) => prev + 1);
+    // updateChecklist((prev) => prev + 1);
   } else {
     setCheckedItems((prev) => {
       const newSet = new Set(prev);
@@ -165,7 +183,7 @@ const response = await updatevp({ id }, Array.from(checkedItems));
       return newSet;
     });
     setCheckedCount((prev) => prev - 1);
-    updateChecklist((prev) => prev - 1);
+    // updateChecklist((prev) => prev - 1);
   }
 };
 

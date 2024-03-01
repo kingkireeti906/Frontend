@@ -116,6 +116,7 @@ function PopUp({ onClose,onSave}) {
       
     
     console.log(`vp is ${vp}`);
+    handleRefreshClick();
         // Call onSave prop if available
         if (onSave) {
             onSave();
@@ -124,7 +125,14 @@ function PopUp({ onClose,onSave}) {
         // Close the popup
         onClose();
     };
-    
+    const handleRefreshClick = () => {
+        setTimeout(() => {
+          // Call the refresh function after the update
+          window.location.reload();
+        }, 300); // 1000 milliseconds = 1 second
+       
+      };
+      
   
     
 

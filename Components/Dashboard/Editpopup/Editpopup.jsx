@@ -160,6 +160,7 @@ function EditpopUp({ editData, onClose, vp,_id }) {
     console.log(`date is ${savedData?.dueDate}`);
     const response = await updateEditData({ _id }, { ...newSavedData });
     console.log('API response:', response);
+    handleRefreshClick();
   } catch (error) {
     console.error('Error while preparing data:', error);
   }
@@ -167,8 +168,15 @@ function EditpopUp({ editData, onClose, vp,_id }) {
 
 
   
+const handleRefreshClick = () => {
+  setTimeout(() => {
+    // Call the refresh function after the update
+    window.location.reload();
+  }, 500); // 1000 milliseconds = 1 second
+ 
+};
 
-  
+
   
   return (
     <div className={styles.overlay}>
@@ -335,6 +343,8 @@ function EditpopUp({ editData, onClose, vp,_id }) {
               onClick={() => {
                 handleSavePopup(_id);
                 handleClosePopup();
+                handleRefreshClick()
+               
               }}
             >
               Save
