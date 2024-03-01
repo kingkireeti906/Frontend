@@ -6,6 +6,7 @@ import plus from '../../../src/assets/Icons/popup.png';
 import Popup from '../Popup/Popup';
 import { getdata } from '../../../Apis/board';
 import Card from '../Card/Card';
+import {updateduetask} from '../../../Apis/board';
 
 
 function Board() {
@@ -20,6 +21,7 @@ function Board() {
     const [backlogCollapsed, setBacklogCollapsed] = useState(false); 
     const [progressCollapse, setProgressCollapse] = useState(false); 
     const [doneCollapse, setDoneCollapse] = useState(false);
+    const [currentdata, setCurrentData] = useState({date:""});
 
     const [vpdata,setvpdata]= useState([]);
   
@@ -182,11 +184,32 @@ function Board() {
     const toggleDoneCollapse = () => {
         setDoneCollapse(!doneCollapse);
     };
-   
-    useEffect(() => {
-        
-      
-    }, [cards]); // Log whenever 'cards' state changes
+
+  
+useEffect(() => {
+    // Function to format the current date as "year-month-date"
+    const getFormattedCurrentDate = () => {
+      const currentDate = new Date();
+      const year = currentDate.getFullYear();
+      const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+      const date = String(currentDate.getDate()).padStart(2, '0');
+  
+      return `${year}-${month}-${date}`;
+    };
+  
+    // Set the formatted current date to the state
+    const currentDateValue = getFormattedCurrentDate();
+    setCurrentData({ date: currentDateValue });
+  
+    // Call datefetching directly with the current date value
+    const fetchData = async () => {
+      const response = await updateduetask({ date: currentDateValue });
+      console.log(response.data);
+    };
+  
+    fetchData();
+  }, [cards]);
+  
     
     useEffect(() => {
         fetching();

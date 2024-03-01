@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { FaTrash } from 'react-icons/fa';
 import styles from './Editpopup.module.css';
 import MyCalendar from '../Calender/Calender';
-import { updateEditData} from '../../../Apis/board';
+import { updateEditData } from '../../../Apis/board';
 
-function EditpopUp({ editData, onClose, vp,_id }) {
+function EditpopUp({ editData, onClose, vp, _id }) {
   const [checkedCount, setCheckedCount] = useState(0);
   const [inputFields, setInputFields] = useState([]);
   const [selectedDueDate, setSelectedDueDate] = useState(null);
@@ -86,8 +86,8 @@ function EditpopUp({ editData, onClose, vp,_id }) {
     setDueDate(date); // Set the dueDate state when the user selects a due date
     setShowCalendar(false);
   };
-  
-  
+
+
   const addInputField = () => {
     const newInputFields = [
       ...inputFields,
@@ -138,46 +138,46 @@ function EditpopUp({ editData, onClose, vp,_id }) {
       .join(', ');
     setChecklist(newChecklist);
   };
- // Runs when count or data changes
+  // Runs when count or data changes
 
- const handleSavePopup = async () => {
-  try {
-    // Save the changes made by the user
-    const newSavedData = {
-      title: oldData.title || editData.title,
-      priority: selectedPriority || oldData.priority,
-      checklist: inputFields
-        .map((field) => field.value.trim())
-        .filter(Boolean)
-        .join(','),
-      dueDate: dueDate || oldData?.dueDate || null, // Use the updated dueDate state
-      vp: inputFields
-        .filter((field) => field.checked)
-        .map((field) => field.value.trim()),
-    };
+  const handleSavePopup = async () => {
+    try {
+      // Save the changes made by the user
+      const newSavedData = {
+        title: oldData.title || editData.title,
+        priority: selectedPriority || oldData.priority,
+        checklist: inputFields
+          .map((field) => field.value.trim())
+          .filter(Boolean)
+          .join(','),
+        dueDate: dueDate || oldData?.dueDate || null, // Use the updated dueDate state
+        vp: inputFields
+          .filter((field) => field.checked)
+          .map((field) => field.value.trim()),
+      };
 
-    setSavedData(newSavedData);
-    console.log(`date is ${savedData?.dueDate}`);
-    const response = await updateEditData({ _id }, { ...newSavedData });
-    console.log('API response:', response);
-    handleRefreshClick();
-  } catch (error) {
-    console.error('Error while preparing data:', error);
-  }
-};
-
-
-  
-const handleRefreshClick = () => {
-  setTimeout(() => {
-    // Call the refresh function after the update
-    window.location.reload();
-  }, 500); // 1000 milliseconds = 1 second
- 
-};
+      setSavedData(newSavedData);
+      console.log(`date is ${savedData?.dueDate}`);
+      const response = await updateEditData({ _id }, { ...newSavedData });
+      console.log('API response:', response);
+      handleRefreshClick();
+    } catch (error) {
+      console.error('Error while preparing data:', error);
+    }
+  };
 
 
-  
+
+  const handleRefreshClick = () => {
+    setTimeout(() => {
+      // Call the refresh function after the update
+      window.location.reload();
+    }, 500); // 1000 milliseconds = 1 second
+
+  };
+
+
+
   return (
     <div className={styles.overlay}>
       <div className={styles.popup_container}>
@@ -203,44 +203,41 @@ const handleRefreshClick = () => {
             <span className={styles.asterisk}>*</span>
           </span>
           <div
-  className={`${styles.prior} ${
-    (selectedPriority || oldData.priority) === 'HIGH PRIORITY' &&
-    styles.selectedPrior
-  }`}
-  name='priority'
-  onClick={() => {
-    handleSelectPriority('HIGH PRIORITY');
-  }}
->
-  <span className={styles.highPriority}></span>
-  <span className={styles.hp}>HIGH PRIORITY</span>
-</div>
-<div
-  className={`${styles.prior} ${
-    (selectedPriority || oldData.priority) === 'MODERATE PRIORITY' &&
-    styles.selectedPrior
-  }`}
-  name='priority'
-  onClick={() => {
-    handleSelectPriority('MODERATE PRIORITY');
-  }}
->
-  <span className={styles.mp}></span>
-  <span className={styles.hp}>MODERATE PRIORITY</span>
-</div>
-<div
-  className={`${styles.prior} ${
-    (selectedPriority || oldData.priority) === 'LOW PRIORITY' &&
-    styles.selectedPrior
-  }`}
-  name='priority'
-  onClick={() => {
-    handleSelectPriority('LOW PRIORITY');
-  }}
->
-  <span className={styles.lp}></span>
-  <span className={styles.hp}>LOW PRIORITY</span>
-</div>
+            className={`${styles.prior} ${(selectedPriority || oldData.priority) === 'HIGH PRIORITY' &&
+              styles.selectedPrior
+              }`}
+            name='priority'
+            onClick={() => {
+              handleSelectPriority('HIGH PRIORITY');
+            }}
+          >
+            <span className={styles.highPriority}></span>
+            <span className={styles.hp}>HIGH PRIORITY</span>
+          </div>
+          <div
+            className={`${styles.prior} ${(selectedPriority || oldData.priority) === 'MODERATE PRIORITY' &&
+              styles.selectedPrior
+              }`}
+            name='priority'
+            onClick={() => {
+              handleSelectPriority('MODERATE PRIORITY');
+            }}
+          >
+            <span className={styles.mp}></span>
+            <span className={styles.hp}>MODERATE PRIORITY</span>
+          </div>
+          <div
+            className={`${styles.prior} ${(selectedPriority || oldData.priority) === 'LOW PRIORITY' &&
+              styles.selectedPrior
+              }`}
+            name='priority'
+            onClick={() => {
+              handleSelectPriority('LOW PRIORITY');
+            }}
+          >
+            <span className={styles.lp}></span>
+            <span className={styles.hp}>LOW PRIORITY</span>
+          </div>
 
         </div>
         <div className={styles.checklist}>
@@ -319,16 +316,16 @@ const handleRefreshClick = () => {
           + Add New
         </span>
         <div className={styles.buttons}>
-        <button
-  className={styles.date}
-  onClick={() => setShowCalendar(true)}
->
-  {selectedDueDate
-    ? new Date(selectedDueDate).toLocaleDateString('en-US')
-    : oldData?.dueDate
-      ? new Date(oldData.dueDate).toLocaleDateString('en-US')
-      : 'Select Due Date'}
-</button>
+          <button
+            className={styles.date}
+            onClick={() => setShowCalendar(true)}
+          >
+            {selectedDueDate
+              ? new Date(selectedDueDate).toLocaleDateString('en-US')
+              : oldData?.dueDate
+                ? new Date(oldData.dueDate).toLocaleDateString('en-US')
+                : 'Select Due Date'}
+          </button>
 
 
           <div>
@@ -344,7 +341,7 @@ const handleRefreshClick = () => {
                 handleSavePopup(_id);
                 handleClosePopup();
                 handleRefreshClick()
-               
+
               }}
             >
               Save

@@ -4,7 +4,7 @@ import styles from './Popup.module.css';
 import MyCalendar from '../Calender/Calender';
 import { create } from '../../../Apis/board';
 
-function PopUp({ onClose,onSave}) {
+function PopUp({ onClose, onSave }) {
     const [checkedCount, setCheckedCount] = useState(0);
     const [inputFields, setInputFields] = useState([]);
     const [selectedDueDate, setSelectedDueDate] = useState(null);
@@ -12,7 +12,7 @@ function PopUp({ onClose,onSave}) {
     const [selectedPriority, setSelectedPriority] = useState(null);
     const [dueDate, setDueDate] = useState(null);
     const [checklist, setChecklist] = useState("");
- 
+
 
     const [data, setdata] = useState({
         title: "",
@@ -98,43 +98,43 @@ function PopUp({ onClose,onSave}) {
 
     // };
     const handleSavePopup = async () => {
-               
+
         const checkedInputFields = inputFields.filter(field => field.checked); // Filter out checked input fields
-        const checklisted = checkedInputFields.map(field => field.value); 
-     const vp = checklisted;
-     
+        const checklisted = checkedInputFields.map(field => field.value);
+        const vp = checklisted;
+
         const savedData = {
             title: data.title,
             priority: selectedPriority,
             checklist: checklist,
-            dueDate: dueDate ? dueDate.toLocaleDateString('en-US') :null,
-            vp:checklisted
+            dueDate: dueDate ? dueDate.toLocaleDateString('en-US') : null,
+            vp: checklisted
         };
         console.log(savedData);
-    
-        const response = await create({...savedData});
-      
-    
-    console.log(`vp is ${vp}`);
-    handleRefreshClick();
+
+        const response = await create({ ...savedData });
+
+
+        console.log(`vp is ${vp}`);
+        handleRefreshClick();
         // Call onSave prop if available
         if (onSave) {
             onSave();
         }
-    
+
         // Close the popup
         onClose();
     };
     const handleRefreshClick = () => {
         setTimeout(() => {
-          // Call the refresh function after the update
-          window.location.reload();
-        }, 300); // 1000 milliseconds = 1 second
-       
-      };
-      
-  
-    
+            // Call the refresh function after the update
+            window.location.reload();
+        }, 500); // 1000 milliseconds = 1 second
+
+    };
+
+
+
 
     return (
         <div className={styles.overlay}>
@@ -166,10 +166,10 @@ function PopUp({ onClose,onSave}) {
                                         type="checkbox"
                                         checked={field.checked}
                                         onChange={e => handleCheckboxChange(field.id, e.target.checked)}
-                                        
+
                                         className={styles.checkBox}
                                     />
-                              
+
                                     <input
                                         type='text'
                                         placeholder='Add a task'

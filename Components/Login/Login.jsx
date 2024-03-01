@@ -2,17 +2,17 @@ import React, { useState } from "react";
 import image from "../../src/assets/Images/Art.png";
 import styles from "./Login.module.css";
 import Eyeicon from "../../src/assets/Icons/view.png";
-import {loginuser} from "../../Apis/auth"
-import {useNavigate } from "react-router-dom";
+import { loginuser } from "../../Apis/auth"
+import { useNavigate } from "react-router-dom";
 
 function Login() {
-    const navigate=useNavigate()
-   
+  const navigate = useNavigate()
+
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [data, setData] = useState({
-    email:'',
-    password:'',
+    email: '',
+    password: '',
 
   });
   const [errors, setErrors] = useState({
@@ -28,7 +28,7 @@ function Login() {
     setShowConfirmPassword(!showConfirmPassword);
   };
   const handlechange = (e) => {
-    setData({ ...data, [e.target.name]:e.target.value });
+    setData({ ...data, [e.target.name]: e.target.value });
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,39 +38,39 @@ function Login() {
     let hasErrors = false;
 
     if (!data.email) {
-        newErrors.email = "Email is required";
-        hasErrors = true;
+      newErrors.email = "Email is required";
+      hasErrors = true;
     }
 
     if (!data.password) {
-        newErrors.password = "Password is required";
-        hasErrors = true;
+      newErrors.password = "Password is required";
+      hasErrors = true;
     }
 
     if (hasErrors) {
-        setErrors(newErrors);
-        return;
+      setErrors(newErrors);
+      return;
     }
 
     try {
-        const response = await loginuser({ ...data });
-        console.log("Login API response:", response);
+      const response = await loginuser({ ...data });
+      console.log("Login API response:", response);
 
-        if (response && response.success) {
-            localStorage.setItem('token', response.token);
-            localStorage.setItem('username', response.name);
-            navigate('/');
-        } else {
-            // Handle unsuccessful login (optional)
-            console.log("Login unsuccessful:", response ? response.errorMessage : "Response is undefined");
-        }
+      if (response && response.success) {
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('username', response.name);
+        navigate('/');
+      } else {
+        // Handle unsuccessful login (optional)
+        console.log("Login unsuccessful:", response ? response.errorMessage : "Response is undefined");
+      }
     } catch (error) {
-        console.error("Error in login API:", error);
+      console.error("Error in login API:", error);
     }
-};
-const naviagtefunction =()=>{
-  navigate('/register')
-}
+  };
+  const naviagtefunction = () => {
+    navigate('/register')
+  }
   return (
     <div className={styles.container}>
       <div className={styles.leftContainer}>
@@ -113,9 +113,9 @@ const naviagtefunction =()=>{
               />
               <p className={styles.error}>{errors.password}</p>
             </div>
-           
+
             <button className={styles.button} onClick={(e) => handleSubmit(e)}>
-            Log in
+              Log in
             </button>
           </form>
           <p className={styles.existaccount}>  Have no account yet?</p>

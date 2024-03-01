@@ -30,7 +30,7 @@ function Setting() {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
-  const updatefunction = async(e) => {
+  const updatefunction = async (e) => {
     e.preventDefault();
 
     // Validate each field
@@ -56,10 +56,10 @@ function Setting() {
       setErrors(newErrors);
       return;
     }
-    const result = await updatepassword({...data})
-    if(result){
+    const result = await updatepassword({ ...data })
+    if (result) {
       console.log(result);
-   
+
     }
   };
 
