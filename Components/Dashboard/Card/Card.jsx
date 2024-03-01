@@ -28,7 +28,7 @@ function Card({ priority, title, id, checklistItems, dueDate, vp,currentSection 
     const [editData, setEditData] = useState([]);
     const [edit ,setEdit]= useState(false);
     const [checkedItemsAfterRender, setCheckedItemsAfterRender] = useState([]);
-    // const baseURL = 'https://kingkireeti906.github.io/Frontend/';
+     const baseURL = 'https://kingkireeti906.github.io/Frontend/';
     // const handlesharelink = (id) => {
     //     const url = `${baseURL}card/${id}`;
     
@@ -56,8 +56,8 @@ function Card({ priority, title, id, checklistItems, dueDate, vp,currentSection 
     //         });
     // };
     const handlesharelink = (id) => {
-        const url = `/card/${id}`;
-    
+        const url = `{baseURL}/card/${id}`;
+            
         navigator.clipboard
             .writeText(url)
             .then(() => {
@@ -67,8 +67,7 @@ function Card({ priority, title, id, checklistItems, dueDate, vp,currentSection 
                     hideProgressBar: true,
                 });
     
-                // Open a new window or tab and navigate to the copied URL
-                window.open(url, '_blank');
+             
             })
             .catch((error) => {
                 // If clipboard writeText fails
