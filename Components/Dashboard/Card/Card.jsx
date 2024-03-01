@@ -27,8 +27,9 @@ function Card({ priority, title, id, checklistItems, dueDate, vp,currentSection 
     const [editData, setEditData] = useState([]);
     const [edit ,setEdit]= useState(false);
     const [checkedItemsAfterRender, setCheckedItemsAfterRender] = useState([]);
+    const baseURL = 'https://kingkireeti906.github.io/Frontend/';
     const handlesharelink = (id) => {
-        const url = `/card/${id}`;
+        const url = `{baseurl}/card/${id}`;
         naviagte(url);
        
     
