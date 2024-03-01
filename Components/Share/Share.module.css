@@ -148,7 +148,7 @@
     display: flex;
     border-radius: 0.7rem;
     border: solid 1px #e2e2e2;
-    display: flex;
+    /* display: flex; */
     align-items: center;
     margin: 0.5rem;
     padding: 0.5rem;
@@ -156,9 +156,10 @@
  
 .input {
     border: none;
-    width:95%;
-    word-wrap: break-word;
-    height:auto;
+    width: 100%; /* Occupy full width of its container */
+    white-space: normal; /* Allow text to wrap to the next line */
+    overflow-wrap: break-word; /* Ensure long words break and wrap onto the next line */
+    height: auto;
     outline: none;
     font-family: "Inter", sans-serif;
     font-weight: 400;
@@ -168,7 +169,6 @@
     &:focus {
         outline: none;
     }
- 
 }
  
 .checkBox {
@@ -215,3 +215,98 @@
     color: #fff;
     border: #cf3636;
 }
+ 
+/* Add a media query for screens below 768px */
+@media (max-width: 768px) {
+    .shareContainer {
+      /* Adjust styles for smaller screens */
+      align-items: flex-start; /* Align items to the start */
+    }
+ 
+    .promanage{
+        align-items: center;
+        margin-right: auto;
+        align-self:flex-start
+    }
+ 
+ 
+    .shareBox {
+        width: auto;
+        height: auto;
+        margin: 2rem;
+        border-radius: 1.4rem;
+        border: solid 2px #edf5fe;
+        background-color: #fff;
+        padding:1rem;
+    }
+ 
+    .priority{
+        font-size: 0.5rem;
+    }
+    .title {
+      font-size: 1.25rem; /* Increase font size */
+    }
+ 
+    .checklistItems {
+        display: flex;
+        align-content: space-evenly;
+        flex-direction: column;
+        /* In your Share.module.css */
+ 
+ 
+        /* Your existing styles */
+        /* Set a fixed height for the container */
+        height: auto; /* Set to auto by default */
+ 
+        /* Enable scrollbar if checklist height exceeds 30rem */
+        max-height: 15rem;
+        overflow-y: auto;
+        scrollbar-color:   #9cb7c5 #fff; 
+ 
+ 
+    }
+ 
+    .checklistItems::-webkit-scrollbar-button {
+        display: none;
+    }
+ 
+    .checklistItems::-webkit-scrollbar-thumb {
+        border-radius: 10rem;
+    }
+ 
+    .inputfieldsBox {
+        width: 12.5rem;
+        height: 1rem;
+        margin:0%;
+        margin-bottom:0.5rem;
+        margin-right:0.5rem;
+        border-radius: 12px;
+        border: solid 1px #e2e2e2;   
+     }
+ 
+     .input{
+        font-size:0.8rem;
+        overflow-wrap: break-word;
+     }
+ 
+    .dueDate {
+      width: auto; /* Allow due date box to adjust width */
+      font-size: 0.7rem; /* Decrease font size */
+    }
+ 
+    .dueDate{
+        width:3.5rem;
+        height:1.5rem;
+        border: solid #eeecec;
+        border-radius: 0.5rem;
+        font-size: 0.4rem;
+    }
+ 
+    .dueDateRed {
+        background-color: #cf3636;
+        color: #fff;
+        border: #cf3636;
+    }
+ 
+    /* Add more responsive styles as needed */
+  }
