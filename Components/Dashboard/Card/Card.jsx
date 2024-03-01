@@ -28,7 +28,7 @@ function Card({ priority, title, id, checklistItems, dueDate, vp,currentSection 
     const [editData, setEditData] = useState([]);
     const [edit ,setEdit]= useState(false);
     const [checkedItemsAfterRender, setCheckedItemsAfterRender] = useState([]);
-    const baseURL = 'https://kingkireeti906.github.io/Frontend/';
+    // const baseURL = 'https://kingkireeti906.github.io/Frontend/';
     // const handlesharelink = (id) => {
     //     const url = `${baseURL}card/${id}`;
     
@@ -56,7 +56,7 @@ function Card({ priority, title, id, checklistItems, dueDate, vp,currentSection 
     //         });
     // };
     const handlesharelink = (id) => {
-        const url = `${baseURL}card/${id}`;
+        const url = `/card/${id}`;
     
         navigator.clipboard
             .writeText(url)
