@@ -29,11 +29,34 @@ function Card({ priority, title, id, checklistItems, dueDate, vp,currentSection 
     const [edit ,setEdit]= useState(false);
     const [checkedItemsAfterRender, setCheckedItemsAfterRender] = useState([]);
     const baseURL = 'https://kingkireeti906.github.io/Frontend/';
+    // const handlesharelink = (id) => {
+    //     const url = `${baseURL}card/${id}`;
+    
+    //     naviagte(url);
+       
+    
+    //     navigator.clipboard
+    //         .writeText(url)
+    //         .then(() => {
+    //             // If clipboard writeText is successful
+    //             toast.success('Card Link copied', {
+    //                 autoClose: 1000,
+    //                 hideProgressBar: true,
+                    
+                  
+    //             });
+    //         })
+    //         .catch((error) => {
+    //             // If clipboard writeText fails
+    //             console.error('Failed to copy the URL to the clipboard:', error);
+    //             toast.error('Failed to copy the Card Link', {
+    //                 autoClose: 1000,
+    //                 hideProgressBar: true,
+    //             });
+    //         });
+    // };
     const handlesharelink = (id) => {
         const url = `${baseURL}card/${id}`;
-    
-        naviagte(url);
-       
     
         navigator.clipboard
             .writeText(url)
@@ -42,9 +65,10 @@ function Card({ priority, title, id, checklistItems, dueDate, vp,currentSection 
                 toast.success('Card Link copied', {
                     autoClose: 1000,
                     hideProgressBar: true,
-                    
-                  
                 });
+    
+                // Open a new window or tab and navigate to the copied URL
+                window.open(url, '_blank');
             })
             .catch((error) => {
                 // If clipboard writeText fails

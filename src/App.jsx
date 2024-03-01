@@ -18,7 +18,7 @@ function App() {
             <Route path="/" element={<Checking Component= {Homepage}/>}/> 
                 <Route path="/register" element={<Registerpage />} />
                 <Route path="/login" element={<Loginpage />} />
-                <Route path="card/:id" element={< CardDetails/>} />
+                <Route path="/card/:id" element={< CardDetails/>} />
                 
             </Routes>
         </BrowserRouter> 
