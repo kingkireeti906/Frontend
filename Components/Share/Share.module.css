@@ -1,0 +1,217 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+ 
+ 
+.shareContainer {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+}
+ 
+.promanage {
+    display: flex;
+    align-items: center;
+    margin: 0%;
+    padding: 0%;
+    margin-top: 0.5rem;
+    margin-right: auto
+}
+ 
+.promanage_text {
+    margin-left: 0.6rem;
+    width: 10rem;
+    height: 1.5rem;
+    align-self: flex-start;
+    flex-grow: 0;
+    font-family: "Poppins", sans-serif;
+    font-size: 1.25rem;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: black
+}
+ 
+.promanageIcon {
+    width: 1.8rem;
+    height: 1.8rem;
+    padding-left: 3rem;
+}
+ 
+.shareBox {
+    width: 38.8rem;
+    height: 35rem;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 2rem;
+    padding:2rem;
+    border-radius: 0.75rem;
+    border: solid 2px #edf5fe;
+    background-color: #fff;
+}
+ 
+.title {
+    font-family: "Poppins", sans-serif;
+    font-size: 1.5rem;
+    /* margin-left: 1rem; */
+    /* width: fit-content; */
+    /* max-width: 100%; */
+    white-space: normal;
+    text-overflow: ellipsis;
+    /* overflow: hidden; */
+}
+ 
+.priorityBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+ 
+.priority {
+    font-family: "Poppins", sans-serif;
+    font-size: 0.5rem;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #707070;
+}
+ 
+ 
+ 
+.color {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+}
+ 
+.highPriorityColor {
+    background-color: #ff2473;
+    border: 1px solid #ff2473;
+}
+ 
+.moderatePriorityColor {
+    background-color: #18b0ff;
+    border: 1px solid #18b0ff;
+}
+ 
+.lowPriorityColor {
+    background-color: #63c05b;
+    border: 1px solid #63c05b;
+}
+ 
+.checklistTitle {
+    font-family: "Poppins", sans-serif;
+    font-size: 1rem;
+}
+ 
+.checklistItems {
+    display: flex;
+    align-content: space-evenly;
+    flex-direction: column;
+    /* In your Share.module.css */
+ 
+ 
+    /* Your existing styles */
+    /* Set a fixed height for the container */
+    height: auto; /* Set to auto by default */
+ 
+    /* Enable scrollbar if checklist height exceeds 30rem */
+    max-height: 30rem;
+    overflow-y: auto;
+    scrollbar-color:   #9cb7c5 #fff; 
+ 
+ 
+}
+.checklistItems::-webkit-scrollbar-button {
+    display: none;
+}
+ 
+.checklistItems ::-webkit-scrollbar-thumb {
+    border-radius: 1rem;
+}
+ 
+ 
+.inputfieldsBox {
+    width: 36.75rem;
+    height: 1.6rem;
+    flex-grow: 0;
+    display: flex;
+    border-radius: 0.7rem;
+    border: solid 1px #e2e2e2;
+    display: flex;
+    align-items: center;
+    margin: 0.5rem;
+    padding: 0.5rem;
+}
+ 
+.input {
+    border: none;
+    width:95%;
+    word-wrap: break-word;
+    height:auto;
+    outline: none;
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    color: #000;
+ 
+    &:focus {
+        outline: none;
+    }
+ 
+}
+ 
+.checkBox {
+    transform: scale(1)
+}
+ 
+.dueDateBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+ 
+.date{
+    font-family: "Poppins", sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #000;
+}
+ 
+ 
+.dueDate{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:5rem;
+    height:2rem;
+    gap: 0.5rem;
+    border: solid #eeecec;
+    border-radius: 0.5rem;
+    background-color: #eeecec;
+    font-family: "Poppins", sans-serif;
+    font-size: 0.6rem;
+    font-weight: 500;
+    margin-left: 1rem;
+}
+ 
+.dueDateRed {
+    background-color: #cf3636;
+    color: #fff;
+    border: #cf3636;
+}

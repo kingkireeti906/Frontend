@@ -7,6 +7,7 @@ import Checking from '../ProtectedRoute/Protected';
 import 'react-calendar/dist/Calendar.css';
 
 import Logout  from '../Components/Dashboard/Logout/Logout';
+import CardDetails from '../Components/Share/Share'
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
             <Route path="/" element={<Checking Component= {Homepage}/>}/> 
                 <Route path="/register" element={<Registerpage />} />
                 <Route path="/login" element={<Loginpage />} />
-
+                <Route path="/card/:id" element={< CardDetails/>} />
                 
             </Routes>
         </BrowserRouter> 

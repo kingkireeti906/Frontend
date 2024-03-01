@@ -71,6 +71,10 @@ export const getUserData = async (_id)=>{
     try {
         console.log(_id)
         const reqUrl = `${backendUrl}/api/v1/board/edit/${_id}`;
+        // const token = localStorage.getItem("token");
+
+        
+        // axios.defaults.headers.common["Authorization"] = token;
         const response = await axios.get (reqUrl);
         console.log(response)
         return response
@@ -81,6 +85,25 @@ export const getUserData = async (_id)=>{
         console.log(error)
         
     }
+}
+export const getshareData = async (id)=>{
+  try {
+    
+      const reqUrl = `${backendUrl}/api/v1/board/edit/${id}`;
+      const token = localStorage.getItem("token");
+
+        
+        axios.defaults.headers.common["Authorization"] = token;
+
+      const response = await axios.get (reqUrl);
+     return response;
+
+     
+
+  } catch (error) {
+      console.log(error)
+      
+  }
 }
 export const updateEditData = async ({ _id }, { title, priority, checklist, dueDate, vp }) => {
     try {

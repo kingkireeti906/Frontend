@@ -1,4 +1,7 @@
 import { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import styles from './Card.module.css';
 import dots from '../../../src/assets/Icons/dots.png';
 import down from '../../../src/assets/Icons/down.jpeg';
@@ -8,9 +11,11 @@ import Delete from '../Delete/Delete';
 import {getUserData} from '../../../Apis/board';
 import EditpopUp from '../Editpopup/Editpopup';
 import {updatevp} from '../../../Apis/board';
+import { useNavigate } from 'react-router-dom';
 
 function Card({ priority, title, id, checklistItems, dueDate, vp,currentSection ,isCollapsed}) {
     const formattedDueDate = dueDate ? formatDate(dueDate) : null;
+    const naviagte=useNavigate()
 
     const [showChecklist, setShowChecklist] = useState(false);
     const [checkedCount, setCheckedCount] = useState(0);
@@ -22,6 +27,33 @@ function Card({ priority, title, id, checklistItems, dueDate, vp,currentSection 
     const [editData, setEditData] = useState([]);
     const [edit ,setEdit]= useState(false);
     const [checkedItemsAfterRender, setCheckedItemsAfterRender] = useState([]);
+    const handlesharelink = (id) => {
+        const url = `/card/${id}`;
+        naviagte(url);
+       
+    
+        navigator.clipboard
+            .writeText(url)
+            .then(() => {
+                // If clipboard writeText is successful
+                toast.success('Card Link copied', {
+                    autoClose: 1000,
+                    hideProgressBar: true,
+                    
+                  
+                });
+            })
+            .catch((error) => {
+                // If clipboard writeText fails
+                console.error('Failed to copy the URL to the clipboard:', error);
+                toast.error('Failed to copy the Card Link', {
+                    autoClose: 1000,
+                    hideProgressBar: true,
+                });
+            });
+    };
+    
+       
     const handleeditClick=async (_id)=>{
         setEdit(true);
         const response =await getUserData(_id);
@@ -110,15 +142,13 @@ const response = await updatevp({ id }, Array.from(checkedItems));
   }
 };
 
-    useEffect(() => {
-        // Set default checked items only when the component mounts
-        const defaultCheckedItems = checklistItems.filter((item) => vp.includes(item.trim()));
-        setCheckedItems(new Set(defaultCheckedItems));
-        setCheckedCount(defaultCheckedItems.length);
-    
-        // Store the checked items after the component renders
-        setCheckedItemsAfterRender(defaultCheckedItems);
-      }, [vp, checklistItems]);
+useEffect(() => {
+    // Set default checked items only when the component mounts
+    const defaultCheckedItems = checklistItems.filter((item) => vp.includes(item.trim()));
+    setCheckedItems(new Set(defaultCheckedItems));
+    setCheckedCount(defaultCheckedItems.length);
+  }, [vp, checklistItems]);
+  
 
     const toggleChecklist = () => {
         setShowChecklist(!showChecklist);
@@ -179,8 +209,8 @@ const response = await updatevp({ id }, Array.from(checkedItems));
 
     // Determine if the due date has passed
     const isDueDatePassed = dueDate ? new Date(dueDate) < new Date() : false;
-    
-
+  
+   
     return (
         <div className={styles.card}>
            
@@ -189,7 +219,7 @@ const response = await updatevp({ id }, Array.from(checkedItems));
                 {showOptions && (
                     <div className={styles.options}>
                         <div onClick={() => handleeditClick(id)} className={styles.edit}>Edit</div>
-                        <div onClick={() => handleOptionClick('Share')} className={styles.share}>Share</div>
+                        <div onClick={() => handlesharelink(id)} className={styles.share}>Share</div>
                         <div onClick={() => handleOptionClick('Delete')} className={styles.delete}>Delete</div>
                        
                     </div>
