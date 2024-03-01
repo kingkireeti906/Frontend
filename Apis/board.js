@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const backendUrl = `http://localhost:3001`;
+// const backendUrl = `http://localhost:3001`;
+const backendUrl =`https://protaskmanager.onrender.com`;
 
 export const getAnalytics = async () => {
     try {

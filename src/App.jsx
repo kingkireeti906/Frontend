@@ -12,7 +12,7 @@ import CardDetails from '../Components/Share/Share'
 function App() {
   return (
     <div>
-       <BrowserRouter>
+       <BrowserRouter basename="/Frontend">
             <Routes>
             <Route path="/" element={<Checking Component= {Homepage}/>}/> 
                 <Route path="/register" element={<Registerpage />} />

@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const backendUrl = `http://localhost:3001`;
-
+// const backendUrl = `http://localhost:3001`;
+const backendUrl =`https://protaskmanager.onrender.com`;
 export const registeruser = async ({ name, email, password, confirmPassword }) => {
   try {
     const reqUrl = `${backendUrl}/api/v1/auth/register`;  // Corrected the URL
